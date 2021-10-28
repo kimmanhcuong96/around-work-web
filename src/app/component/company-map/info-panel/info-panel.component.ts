@@ -17,7 +17,7 @@ export class InfoPanelComponent implements OnInit {
   }
 
   handleClosePanel() {
-
+    this.isShow = false;
   }
 
 }
