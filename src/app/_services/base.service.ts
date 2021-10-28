@@ -2,8 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/comm
 import { Injectable } from '@angular/core';
 import { Headers } from '@angular/http';
 import { Observable } from 'rxjs';
-import 'rxjs-compat/add/operator/map';
-import 'rxjs/add/operator/map';
+import { map } from 'rxjs/operators';
 import { IService } from './interface.service';
 import { Const } from '../_consts/const';
 
@@ -42,6 +41,7 @@ export class BaseService<T> implements IService<T> {
         this.uploadDataUrl = 'upload-data';
         this.headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Cache-Control': 'no-cache' });
         this.httpClient = httpClient;
+        this.apiUrl = '';
     }
 
     init(apiUrl: string) {
@@ -165,7 +165,7 @@ export class BaseService<T> implements IService<T> {
             // load the image as a blob
             .get(url, { responseType: 'blob' })
             // create an object url of that blob that we can use in the src attribute
-            .map(e => URL.createObjectURL(e));
+            .pipe(map(e => URL.createObjectURL(e)));
     }
 
     loadImageBlob(addUrl: string): Observable<any> {

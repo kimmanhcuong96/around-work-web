@@ -1,0 +1,73 @@
+.detail-panel-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin-right: 9px;
+    height: calc(100vh - 161px);
+    width: 32em !important;
+    background: #e0e0e0;
+    color: #333;
+    border: 1px solid #c8c8c8;
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
+    opacity: 1;
+    z-index: 1100;
+    padding: 14px;
+    overflow-y: auto;
+    .hide-detail-field {
+        display: none;
+    }
+    .close-icon {
+        cursor: pointer;
+        float: right;
+        color: #848484;
+    }
+    .ui-g-12 div li {
+        list-style-type: none;
+        padding-left: 20px;
+    }
+    .form-group-div {
+        position: relative;
+        .icon_expand {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 10px !important;
+            cursor: pointer;
+        }
+        .item-container {
+            padding-left: 0px !important;
+            padding-right: 0px !important;
+        }
+    }
+    li {
+        overflow-wrap: break-word;
+    }
+    .list-object .form-group-div {
+        padding-left: 25px;
+    }
+}
+
+.detail-header {
+    margin-top: 20px;
+    margin-bottom: 8px;
+}
+
+.section-header {
+    white-space: pre-wrap;
+}
+
+@media screen and (max-width: 600px) {
+    .detail-panel-container {
+        position: absolute;
+    }
+}
+
+.list-value {
+    display: list-item;
+    list-style-type: disc;
+    margin-left: 25px;
+}
+
+.item-label-title {
+    font-weight: 700;
+}

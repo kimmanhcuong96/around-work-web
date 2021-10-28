@@ -18,27 +18,27 @@ export interface IService<T> {
    * @param jsonReq record information
    * @return result of updating
    */
-  updateRecord(jsonReq: T, id: any);
+  updateRecord(jsonReq: T, id: any): any;
 
   /**
    * delete 1 specified record
    * @param jsonReq record id
    * @return result of deleting
    */
-  delRecord(jsonReq: number);
+  delRecord(jsonReq: number): any;
 
   /**
    * delete multi specified record
    * @param jsonReq records id
    * @return result of deleting
    */
-  delRecords(jsonReq: number[]);
+  delRecords(jsonReq: number[]): any;
 
   /**
    * add new record to database
    * @param jsonReq record to add
    * @return result of adding
    */
-  addRecord(jsonReq: T);
+  addRecord(jsonReq: T): any;
 
 }

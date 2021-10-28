@@ -5,18 +5,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CompanyMapComponent } from './component/company-map/company-map.component';
 import { HomeScreenComponent } from './screen/home-screen/home-screen.component';
+import { InfoPanelComponent } from './component/company-map/info-panel/info-panel.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CompanyMapComponent,
-    HomeScreenComponent
+    HomeScreenComponent,
+    InfoPanelComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AgmCoreModule.forRoot({
-      apiKey: "AIzaSyD8S609SZ4Ras2gzbhd51ls1DzHzt_5miQ",
+      apiKey: "AIzaSyD3qYuv5tRbY7ygYk9ays05P3GhFlCgIBI",
       libraries: ["places", "geometry"]
     })
   ],
