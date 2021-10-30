@@ -1,5 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Location } from '../../_models/google-model/location';
+import { MapService } from 'src/app/_services/map.service';
 
 @Component({
   selector: 'app-company-map',
@@ -10,12 +11,12 @@ export class CompanyMapComponent implements OnInit {
   @ViewChild('infoPanel') infoPanel: ElementRef;
   title = 'My first AGM project';
   location: Location;
-  mapClickListener: any;
+  user: any;
 
   map: google.maps.Map;
   infoWindow: google.maps.InfoWindow;
   isShowCompanyPanel = false;
-  constructor() {
+  constructor(private mapService: MapService) {
 
   }
 
@@ -24,80 +25,56 @@ export class CompanyMapComponent implements OnInit {
       latitude: 0,
       longitude: 0,
       mapType: "TERRAIN",
-      zoom: 5,
+      zoom: 15,
       markers: [
         {
           lat: 0,
           lng: 0
         }
-      ]
+      ],
+    };
+    this.user = {
+      lat: 0,
+      lng: 0
+    }
+    // this.mapService.getUserLocation().subscribe(res => {
+    //   console.log('response:  ', res);
+    // }, err => {
+    //   console.log(err);
+    // });
+    if (!navigator.geolocation) {
+      console.log('not support location');
+    } else {
+      navigator.geolocation.getCurrentPosition(position => {
+        console.log('xx: ', position.coords);
+        this.user = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+      
+        this.updatePositionWhenUserMove();
+      });
     }
   }
 
+  updatePositionWhenUserMove() {
+    navigator.geolocation.watchPosition((position) => {
+      console.log('xx: ', position.coords);
+    }, (err) => {
+
+    })
+  }
+
   addMarker(lat: number, lng: number) {
-    this.location.markers.push({
-      lat,
-      lng
-    });
-    this.isShowCompanyPanel = !this.isShowCompanyPanel;
-    this.initMap();
+    // this.location.markers.push({
+    //   lat,
+    //   lng
+    // });
+    // this.isShowCompanyPanel = !this.isShowCompanyPanel;
   }
 
   logSampleData(event: any) {
     console.log('data: ', event);
   }
 
-
-  initMap(): void {
-    console.log('init map');
-    this.map = new google.maps.Map(document.getElementById("map") as HTMLElement, {
-      center: { lat: -34.397, lng: 150.644 },
-      zoom: 6,
-    });
-    this.infoWindow = new google.maps.InfoWindow();
-
-    const locationButton = document.createElement("button");
-
-    locationButton.textContent = "Pan to Current Location";
-    locationButton.classList.add("custom-map-control-button");
-
-    this.map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
-
-    // Try HTML5 geolocation.
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position: GeolocationPosition) => {
-          const pos = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          };
-
-          this.infoWindow.setPosition(pos);
-          this.infoWindow.setContent("Location found.");
-          this.infoWindow.open(this.map);
-          this.map.setCenter(pos);
-        },
-        () => {
-          this.handleLocationError(true, this.infoWindow, this.map.getCenter()!);
-        }
-      );
-    } else {
-      // Browser doesn't support Geolocation
-      this.handleLocationError(false, this.infoWindow, this.map.getCenter()!);
-    }
-  }
-
-  handleLocationError(
-    browserHasGeolocation: boolean,
-    infoWindow: google.maps.InfoWindow,
-    pos: google.maps.LatLng
-  ) {
-    infoWindow.setPosition(pos);
-    infoWindow.setContent(
-      browserHasGeolocation
-        ? "Error: The Geolocation service failed."
-        : "Error: Your browser doesn't support geolocation."
-    );
-    infoWindow.open(this.map);
-  }
 }

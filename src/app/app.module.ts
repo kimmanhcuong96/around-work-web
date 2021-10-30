@@ -7,6 +7,7 @@ import { CompanyMapComponent } from './component/company-map/company-map.compone
 import { HomeScreenComponent } from './screen/home-screen/home-screen.component';
 import { InfoPanelComponent } from './component/company-map/info-panel/info-panel.component';
 import { SharedPrimengModule } from './_shared/shared-primeng/shared-primeng.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { SharedPrimengModule } from './_shared/shared-primeng/shared-primeng.mod
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     AgmCoreModule.forRoot({
       apiKey: "AIzaSyD3qYuv5tRbY7ygYk9ays05P3GhFlCgIBI",
       libraries: ["places", "geometry"]
