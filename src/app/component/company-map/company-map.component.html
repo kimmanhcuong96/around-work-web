@@ -2,7 +2,7 @@
 <agm-map [latitude]="user.lat || location.latitude" [longitude]="user.lng ||location.longitude" [zoom]="location.zoom"
     (mapClick)="addMarker($event.coords.lat, $event.coords.lng); logSampleData($event)">
     <agm-marker *ngFor="let marker of location.markers" [latitude]="marker.lat" [longitude]="marker.lng"></agm-marker>
-    <agm-marker [latitude]="user.lat" [longitude]="user.lng" [iconUrl]=""></agm-marker>
+    <agm-marker [latitude]="user.lat" [longitude]="user.lng" iconUrl="assets/user-position.png"></agm-marker>
 </agm-map>
 <app-info-panel [toggleInfoPanel]="isShowCompanyPanel"></app-info-panel>
 <div id="map"></div>
