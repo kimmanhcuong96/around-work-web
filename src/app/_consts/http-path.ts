@@ -3,4 +3,6 @@ export class HttpPath {
   public static ROUTE_ROOT = '/';
   public static ROUTE_HOME = '';
   public static ROUTE_MAP = 'map';
+
+  public static IP_SITE='https://jsonip.com/'
 }

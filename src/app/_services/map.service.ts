@@ -21,4 +21,13 @@ export class MapService {
     url = 'https://ipapi.co/8.8.8.8/json/'
     return this.httpClient.get(url, { headers: new HttpHeaders().set('Cache-Control', 'no-cache'), observe: 'response' });
   }
+
+  getUserIpFromExternal() {
+    return this.httpClient.get(HttpPath.IP_SITE, { observe: 'response' });
+  }
+
+  getLocationFromExternalByIp(ip: string, acesssKey: string) {
+    let url = `http://api.ipstack.com/${ip}?access_key=${acesssKey}`
+    return this.httpClient.get(url, { observe: 'response' });
+  }
 }
